@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 import { User } from '../_models';
@@ -13,11 +13,6 @@ export class HomeComponent implements OnInit {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
    }
    
-
-   ngOnInit() {
-      this.loadAllUsers();
-   }
-
    deleteUser(id: number) {
       this.userService.delete(id).pipe(first()).subscribe(() => { 
          this.loadAllUsers() 
@@ -29,4 +24,38 @@ export class HomeComponent implements OnInit {
          this.users = users; 
       });
    }
+
+   ngOnInit() {
+      console.log('ngOnInit Called');
+      this.loadAllUsers();
+   }
+
+   ngOnChanges(simpleChanges: SimpleChanges) {
+      console.log('ngOnChanges Called', simpleChanges);
+   }
+
+   ngDoCheck() {
+      console.log('ngOnDoCheck Called');
+   }
+
+   ngAfterContentInit() {
+      console.log('ngAfterContentInit Called');
+   }
+
+   ngAfterContentChecked() {
+      console.log('ngAfterContentChecked Called');
+   }
+
+   ngAfterViewInit() {
+      console.log('ngAfterViewInit Called');
+   }
+
+   ngAfterViewChecked() {
+      console.log('ngAfterViewChecked Called');
+   }
+
+   ngOnDestroy() {
+      console.log('ngOnDestroy Called');
+   }
+   
 }
